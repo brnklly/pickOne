@@ -1,4 +1,6 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 // import routes
 const users = require("./routes/api/users");
@@ -6,6 +8,20 @@ const groups = require("./routes/api/groups");
 const choices = require("./routes/api/choices");
 
 const app = express();
+
+// body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// config db
+const db = require("./config/keys").mongoURI;
+mongoose
+  .connect(
+    db,
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.log(err));
 
 app.get("/", (req, res) => {
   res.send("Welcome to PickOne");

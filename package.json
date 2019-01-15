@@ -1,5 +1,5 @@
 {
-  "name": "pickOne",
+  "name": "Pick One",
   "version": "1.0.0",
   "description": "Randomly picks from different user set options in order to make desicions for the user",
   "main": "server.js",
