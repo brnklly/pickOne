@@ -231,7 +231,7 @@ router.delete(
     // get user
     User.findOneAndDelete({ _id: req.user.id })
       .then(() => {
-        res.json({ msg: "user deleted" });
+        res.json({ msg: "User deleted" });
       })
       .catch(err => console.log(err));
   }
