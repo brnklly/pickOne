@@ -2,11 +2,15 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 
+// load functions
+const formatGroup = require("../../functions/format-group");
+
 // load validation
 const validateGroupInput = require("../../validation/group");
 
 // load models
 const Group = require("../../models/Group");
+const Choice = require("../../models/Choice");
 
 // @route     GET /api/groups/test
 // @desc      Test groups
@@ -74,8 +78,12 @@ router.get(
         if (!group) {
           return res.status(404).json({ msg: "Group not found" });
         }
-        // return group
-        res.json(group);
+
+        Choice.find({ group: group._id })
+          .then(choices => {
+            res.json(formatGroup(group, choices));
+          })
+          .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
   }
@@ -104,11 +112,11 @@ router.post(
 
         // update title
         group.title = req.body.title;
-        // save group
-        group
-          .save()
-          .then(group => {
-            res.json(group);
+
+        // save group and return group
+        Promise.all([group.save(), Choice.find({ group: group._id })])
+          .then(([group, choices]) => {
+            res.json(formatGroup(group, choices));
           })
           .catch(err => console.log(err));
       })

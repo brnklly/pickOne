@@ -1,11 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// create GroupSchema
-const GroupSchema = new Schema({
+// create ChoiceSchema
+const ChoiceSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User"
+  },
+  group: {
+    type: Schema.Types.ObjectId,
+    ref: "Group"
   },
   title: {
     type: String,
@@ -17,4 +21,4 @@ const GroupSchema = new Schema({
   }
 });
 
-module.exports = Group = mongoose.model("Group", GroupSchema);
+module.exports = Choice = mongoose.model("Choice", ChoiceSchema);

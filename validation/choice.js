@@ -1,7 +1,7 @@
 const Validator = require("validator");
 const isEmpty = require("./is-empty");
 
-module.exports = function validateGroupInput(data) {
+module.exports = function validateChoiceInput(data) {
   let errors = {};
 
   data.title = !isEmpty(data.title) ? data.title : "";
