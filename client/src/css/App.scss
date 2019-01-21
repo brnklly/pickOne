@@ -224,6 +224,7 @@ header {
       color: var(--white);
       padding: 5px;
       margin-left: 10px;
+      cursor: pointer;
     }
   }
 }
@@ -253,6 +254,7 @@ nav {
     align-items: center;
     padding: 0 10px;
     color: var(--white);
+    cursor: pointer;
   }
 }
 
@@ -520,6 +522,10 @@ main {
   }
 
   main {
+    padding-left: var(--nav-width);
+  }
+
+  #spinner {
     padding-left: var(--nav-width);
   }
 

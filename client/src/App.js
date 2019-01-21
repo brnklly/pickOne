@@ -71,6 +71,8 @@ class App extends Component {
             <Header onNavButtonClick={this.onNavButtonClick} />
             <Nav />
 
+            <Route exact path="/" component={Register} />
+
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
 

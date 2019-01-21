@@ -29,11 +29,6 @@ mongoose
 app.use(passport.initialize());
 require("./config/passport")(passport);
 
-// routes
-app.get("/", (req, res) => {
-  res.send("Welcome to PickOne");
-});
-
 // use routes
 app.use("/api/users", users);
 app.use("/api/groups", groups);
