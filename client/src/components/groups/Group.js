@@ -8,6 +8,7 @@ import {
   editChoice,
   deleteChoice
 } from "../../actions/choiceActions";
+import Spinner from "../common/Spinner";
 
 class Group extends Component {
   constructor(props) {
@@ -182,7 +183,7 @@ class Group extends Component {
 
     // Loading Spinner
     if (loading || group === null) {
-      return null;
+      return <Spinner />;
     }
 
     return (

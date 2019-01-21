@@ -15,6 +15,8 @@ import Account from "./components/auth/Account";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Dashboard from "./components/Dashboard";
 import Group from "./components/groups/Group";
+import Error from "./components/errors/Error";
+import NotFound from "./components/errors/NotFound";
 
 // check for token
 if (localStorage.jwtToken) {
@@ -26,6 +28,11 @@ if (localStorage.jwtToken) {
   store.dispatch(setCurrentUser(decoded));
 }
 
+window.addEventListener("click", e => {
+  const nav = Array.from(document.getElementsByTagName("nav"))[0];
+  nav.classList.remove("show");
+});
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -34,7 +41,9 @@ class App extends Component {
     this.closeOverlay = this.closeOverlay.bind(this);
   }
 
-  onNavButtonClick = () => {
+  onNavButtonClick = e => {
+    e.stopPropagation();
+
     const nav = Array.from(document.getElementsByTagName("nav"))[0];
     const isShown = nav.classList.contains("show");
     if (isShown) {
@@ -88,6 +97,9 @@ class App extends Component {
               )}
             />
             <PrivateRoute exact path="/account" component={Account} />
+
+            <Route exact path="/error" component={Error} />
+            <Route component={NotFound} />
           </div>
         </Router>
       </Provider>

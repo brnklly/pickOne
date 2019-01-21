@@ -3,7 +3,7 @@ import React from "react";
 const Spinner = () => {
   return (
     <div id="spinner">
-      <i class="fas fa-spinner" />
+      <i className="fas fa-spinner" />
     </div>
   );
 };

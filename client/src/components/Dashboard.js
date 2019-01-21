@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getGroups, addGroup } from "../actions/groupActions";
+import Spinner from "./common/Spinner";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -52,8 +53,12 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { groups } = this.props.groups;
+    const { groups, loading } = this.props.groups;
     const { errors } = this.state;
+
+    if (loading) {
+      return <Spinner />;
+    }
 
     return (
       <main id="dashboard-page">
