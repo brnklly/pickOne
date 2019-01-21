@@ -1,16 +1,28 @@
 const Validator = require("validator");
 const isEmpty = require("./is-empty");
 
-module.exports = function validateChoiceInput(data) {
+module.exports = function validateChoiceInput(data, type) {
   let errors = {};
 
-  data.title = !isEmpty(data.title) ? data.title : "";
+  if (type === "add") {
+    data.title = !isEmpty(data.title) ? data.title : "";
 
-  if (!Validator.isLength(data.title, { min: 1, max: 50 })) {
-    errors.title = "Title cannot be longer than 50 characters";
+    if (!Validator.isLength(data.title, { min: 1, max: 50 })) {
+      errors.addChoiceTitle = "Title cannot be longer than 50 characters";
+    }
+    if (Validator.isEmpty(data.title)) {
+      errors.addChoiceTitle = "Title field is required";
+    }
   }
-  if (Validator.isEmpty(data.title)) {
-    errors.title = "Title field is required";
+
+  if (type === "edit") {
+    data.title = !isEmpty(data.title) ? data.title : "";
+    if (!Validator.isLength(data.title, { min: 1, max: 50 })) {
+      errors.editChoiceTitle = "Title cannot be longer than 50 characters";
+    }
+    if (Validator.isEmpty(data.title)) {
+      errors.editChoiceTitle = "Title field is required";
+    }
   }
 
   return {

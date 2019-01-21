@@ -123,11 +123,11 @@ router.get(
   }
 );
 
-// @route     POST /api/users/:id/edit
+// @route     POST /api/users/edit
 // @desc      Edit user email && || password
 // @access    Private
 router.post(
-  "/:id/edit",
+  "/edit",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     // check for validation

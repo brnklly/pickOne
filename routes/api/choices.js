@@ -19,15 +19,15 @@ router.get("/test", (req, res) => {
   res.json({ msg: "choices works" });
 });
 
-// @route     GET /api/choices/add/groups/:group
+// @route     POST /api/choices/add/groups/:group
 // @desc      Add a choice to a group
 // @access    Private
-router.get(
+router.post(
   "/add/groups/:group",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     // check for validation
-    const { errors, isValid } = validateChoiceInput(req.body);
+    const { errors, isValid } = validateChoiceInput(req.body, "add");
     if (!isValid) {
       return res.status(400).json(errors);
     }
@@ -70,7 +70,7 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     // validation
-    const { errors, isValid } = validateChoiceInput(req.body);
+    const { errors, isValid } = validateChoiceInput(req.body, "edit");
     if (!isValid) {
       return res.status(400).json(errors);
     }

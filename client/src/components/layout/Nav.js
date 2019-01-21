@@ -22,7 +22,7 @@ class Nav extends Component {
   };
 
   render() {
-    const { user, isAuthenticated } = this.props.auth;
+    const { isAuthenticated } = this.props.auth;
 
     return (
       <nav>

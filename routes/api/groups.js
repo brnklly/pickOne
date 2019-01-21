@@ -42,7 +42,12 @@ router.post(
     newGroup
       .save()
       .then(group => {
-        res.json(group);
+        // get all Groups for user
+        Group.find({ user: req.user.id })
+          .then(groups => {
+            res.json(groups);
+          })
+          .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
   }
@@ -132,14 +137,16 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     // find group by id and user
+    // find all choices of the group
     Group.findOne({ user: req.user.id, _id: req.params.id })
       .then(group => {
         if (!group) {
           return res.status(404).json({ msg: "Group not found" });
         }
 
-        group
-          .remove()
+        // remove group
+        // remove choices
+        Promise.all([group.remove(), Choice.deleteMany({ group: group._id })])
           .then(() => {
             res.json({ msg: "Group deleted" });
           })
