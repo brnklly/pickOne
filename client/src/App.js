@@ -101,7 +101,7 @@ class App extends Component {
             <PrivateRoute exact path="/account" component={Account} />
 
             <Route exact path="/error" component={Error} />
-            <Route component={NotFound} />
+            <Route path="*" component={NotFound} />
           </div>
         </Router>
       </Provider>
