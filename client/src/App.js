@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser } from "./actions/authActions";
@@ -71,37 +71,39 @@ class App extends Component {
             <Header onNavButtonClick={this.onNavButtonClick} />
             <Nav />
 
-            <Route exact path="/" component={Register} />
+            <Switch>
+              <Route exact path="/" component={Register} />
 
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
 
-            <PrivateRoute
-              exact
-              path="/dashboard"
-              component={props => (
-                <Dashboard
-                  {...props}
-                  openOverlay={this.openOverlay}
-                  closeOverlay={this.closeOverlay}
-                />
-              )}
-            />
-            <PrivateRoute
-              exact
-              path="/group/:id"
-              component={props => (
-                <Group
-                  {...props}
-                  openOverlay={this.openOverlay}
-                  closeOverlay={this.closeOverlay}
-                />
-              )}
-            />
-            <PrivateRoute exact path="/account" component={Account} />
+              <PrivateRoute
+                exact
+                path="/dashboard"
+                component={props => (
+                  <Dashboard
+                    {...props}
+                    openOverlay={this.openOverlay}
+                    closeOverlay={this.closeOverlay}
+                  />
+                )}
+              />
+              <PrivateRoute
+                exact
+                path="/group/:id"
+                component={props => (
+                  <Group
+                    {...props}
+                    openOverlay={this.openOverlay}
+                    closeOverlay={this.closeOverlay}
+                  />
+                )}
+              />
+              <PrivateRoute exact path="/account" component={Account} />
 
-            <Route exact path="/error" component={Error} />
-            <Route path="*" component={NotFound} />
+              <Route exact path="/error" component={Error} />
+              <Route component={NotFound} />
+            </Switch>
           </div>
         </Router>
       </Provider>
